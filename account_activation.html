@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Paiement</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        h1::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            margin: 10px auto 0;
+            background-color: #2196F3;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 24px; /* Augmente la taille pour les sous-titres */
+            margin-bottom: 15px;
+        }
+        .payment-option {
+            margin-bottom: 30px;
+        }
+        .payment-option img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .payment-option p {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+        }
+        select, input[type="text"], input[type="submit"] {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        input[type="text"]:hover, select:hover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #007bff;
+        }
+        .payment-option {
+            display: flex;
+            align-items: center;
+        }
+        .payment-option select {
+            background: url('usdt-trc20-logo.png') no-repeat 95% 50%;
+            background-size: 30px;
+        }
+        .payment-details img.qr-code {
+            display: block;
+            margin: 20px auto 10px;
+            width: 200px;
+            height: auto;
+        }
+        .payment-details p.qr-description {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+        .select-option {
+            display: flex;
+            align-items: center;
+        }
+        .select-option img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+    </style>
+    <script>
+        function showPaymentOption(option) {
+            var options = document.querySelectorAll('.payment-details');
+            options.forEach(function(opt) {
+                opt.style.display = 'none';
+            });
+            if (option) {
+                document.getElementById(option).style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Page</h1>
+        <h2>Pay with Binance</h2>
+        <p>Select the currency you want to pay with:</p>
+        <div class="payment-option">
+            <select onchange="showPaymentOption(this.value)">
+                <option value="" disabled selected>Choose currency</option>
+                <option value="usdt-trc20">
+                    <div class="select-option">
+                        <img src="usdt-trc20-logo.png" alt="USDT TRC20 Logo"> USDT TRC20
+                    </div>
+                </option>
+                <option value="usdt-erc20">
+                    <div class="select-option">
+                        <img src="usdt-erc20-logo.png" alt="USDT ERC20 Logo"> USDT ERC20
+                    </div>
+                </option>
+                <option value="tron">
+                    <div class="select-option">
+                        <img src="tron-logo.png" alt="TRON Logo"> TRON (TRX)
+                    </div>
+                </option>
+            </select>
+        </div>
+        <div id="usdt-trc20" class="payment-details" style="display:none;">
+            <img src="your-usdt-trc20-qr-code-url" alt="USDT TRC20 QR Code" class="qr-code">
+            <p class="qr-description">USDT TRC20 QR Code</p>
+            <input type="text" value="your-usdt-trc20-wallet-address" readonly>
+        </div>
+        <div id="usdt-erc20" class="payment-details" style="display:none;">
+            <img src="your-usdt-erc20-qr-code-url" alt="USDT ERC20 QR Code" class="qr-code">
+            <p class="qr-description">USDT ERC20 QR Code</p>
+            <input type="text" value="your-usdt-erc20-wallet-address" readonly>
+        </div>
+        <div id="tron" class="payment-details" style="display:none;">
+            <img src="your-tron-qr-code-url" alt="TRON QR Code" class="qr-code">
+            <p class="qr-description">TRON QR Code</p>
+            <input type="text" value="your-tron-wallet-address" readonly>
+        </div>
+
+        <h2>Pay with Perfect Money</h2>
+        <form action="https://perfectmoney.com/api/step1.asp" method="POST">
+            <input type="hidden" name="PAYEE_ACCOUNT" value="E44208199">
+            <input type="hidden" name="PAYEE_NAME" value="Chatcloud">
+            <input type="hidden" name="PAYMENT_AMOUNT" value="30">
+            <input type="hidden" name="PAYMENT_UNITS" value="EUR">
+            <input type="hidden" name="STATUS_URL" value="https://www.myshop.com/cgi-bin/xact.cgi">
+            <input type="hidden" name="PAYMENT_URL" value="https://www.myshop.com/cgi-bin/chkout1.cgi">
+            <input type="hidden" name="NOPAYMENT_URL" value="https://www.myshop.com/cgi-bin/chkout2.cgi">
+            <input type="hidden" name="BAGGAGE_FIELDS" value="ORDER_NUM CUST_NUM">
+            <input type="hidden" name="ORDER_NUM" value="9801121">
+            <input type="hidden" name="CUST_NUM" value="2067609">
+            <input type="submit" name="PAYMENT_METHOD" value="Pay with Perfect Money">
+        </form>
+    </div>
+</body>
+</html>
